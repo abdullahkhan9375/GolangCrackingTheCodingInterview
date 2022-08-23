@@ -120,7 +120,43 @@ func TestCase10_IsPalindrome(aTest *testing.T) {
 func TestCase11_IsPalindrome(aTest *testing.T) {
 	var lString = "Step on no pets."
 	got := chapter1.IsPalindromePermutation(lString)
-	if got == true {
+	if got == false {
 		aTest.Errorf("%s has a palindrome permutation", lString)
+	}
+}
+
+func TestCase12_OneAway(aTest *testing.T) {
+	var lStringA = "bale"
+	var lStringB = "pale"
+	got := chapter1.OneAway(lStringA, lStringB)
+	if got == false {
+		aTest.Errorf("%s and %s only have a 1 edit difference.", lStringA, lStringB)
+	}
+}
+
+func TestCase13_OneAway(aTest *testing.T) {
+	var lStringA = "bay"
+	var lStringB = "baye"
+	got := chapter1.OneAway(lStringA, lStringB)
+	if got == false {
+		aTest.Errorf("%s and %s only have a 1 edit difference.", lStringA, lStringB)
+	}
+}
+
+func TestCase14_OneAway(aTest *testing.T) {
+	var lStringA = "bay"
+	var lStringB = "byy"
+	got := chapter1.OneAway(lStringA, lStringB)
+	if got == false {
+		aTest.Errorf("%s and %s only have a 1 edit difference.", lStringA, lStringB)
+	}
+}
+
+func TestCase15_OneAway(aTest *testing.T) {
+	var lStringA = "pale"
+	var lStringB = "bake"
+	got := chapter1.OneAway(lStringA, lStringB)
+	if got == true {
+		aTest.Errorf("%s and %s only have a 2 edit difference.", lStringA, lStringB)
 	}
 }

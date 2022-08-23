@@ -1,7 +1,9 @@
 package chapter1
 
 import (
+	"math"
 	"sort"
+	"strings"
 	"unicode"
 )
 
@@ -100,10 +102,11 @@ func contains(s []string, aRune rune) bool {
 // A palindrome is a word or phrase that is the same forwards and backwards. A permutation
 // is a rearrangement of letters. The palindrome does not need to be limited to just dictionary words.
 func IsPalindromePermutation(aString string) bool {
-	var stringLookUp map[rune]int = make(map[rune]int, len(aString))
-	var lGrammarFilterArray []string = []string{" ", ",", "'", "."}
-	for _, aRune := range aString {
-		if !contains(lGrammarFilterArray, aRune) {
+	var lString string = strings.ToLower(aString)
+	var stringLookUp map[rune]int = make(map[rune]int, len(lString))
+	var lPuncFilterArray []string = []string{" ", ",", "'", "."}
+	for _, aRune := range lString {
+		if !contains(lPuncFilterArray, aRune) {
 			var aVal, ok = stringLookUp[aRune]
 			if ok {
 				stringLookUp[aRune] = aVal + 1
@@ -123,4 +126,40 @@ func IsPalindromePermutation(aString string) bool {
 	}
 
 	return singleCount <= 1
+}
+
+// One Away: There are three types of edits that can be performed on strings: insert a character,
+// remove a character, or replace a character. Given two strings, write a function to check if they are
+// one edit (or zero edits) away
+
+// return true if <= 1 edit diff. False if > 1 diff.
+func OneAway(aStringA string, aStringB string) bool {
+	var diff = 0
+	if math.Abs(float64(len(aStringA)-len(aStringB))) > 1 {
+		return false
+	}
+
+	var lLongerString string
+	if len(aStringA) > len(aStringB) {
+		lLongerString = aStringA
+	} else {
+		lLongerString = aStringB
+	}
+
+	var stringLookUp map[rune]int = make(map[rune]int, len(lLongerString))
+	for _, aRune := range aStringA {
+		if aVal, ok := stringLookUp[aRune]; ok {
+			stringLookUp[aRune] = aVal + 1
+		} else {
+			stringLookUp[aRune] = 0
+		}
+	}
+
+	for _, aRune := range aStringB {
+		if _, ok := stringLookUp[aRune]; !ok {
+			diff++
+		}
+	}
+
+	return diff <= 1
 }
