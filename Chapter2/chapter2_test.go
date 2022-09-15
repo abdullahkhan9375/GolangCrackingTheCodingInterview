@@ -112,3 +112,113 @@ func TestCase5_KthTolast(aTest *testing.T) {
 		aTest.Error("Expected: ", KthElement, "\n Recieved: ", got)
 	}
 }
+
+func TestCase6_DeleteMiddleNode(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+	list.Insert(1)
+	list.Insert(2)
+
+	// Act
+	got := chapter2.DeleteMiddleNode(&list)
+
+	// Assert
+	if got == nil {
+		aTest.Error("Expected: error", "\n Recieved: ", got)
+	}
+}
+
+func TestCase7_DeleteMiddleNode(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+
+	// Act
+	got := chapter2.DeleteMiddleNode(&list)
+
+	// Assert
+	if got == nil {
+		aTest.Error("Expected: error", "\n Recieved: ", got)
+	}
+}
+
+func TestCase8_DeleteMiddleNode(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+	list.Insert(1)
+	list.Insert(2)
+	list.Insert(5)
+	list.Insert(6)
+
+	lDataArray := []int{1, 2, 6}
+	// Act
+	chapter2.DeleteMiddleNode(&list)
+	got := list.GetDataArray()
+
+	// Assert
+	if !IsEqual(got, lDataArray) {
+		aTest.Error("Expected: ", lDataArray, "\n Recieved: ", got)
+	}
+}
+
+func TestCase9_DeleteMiddleNode(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+	list.Insert(1)
+	list.Insert(2)
+	list.Insert(5)
+	list.Insert(6)
+	list.Insert(5)
+	list.Insert(9)
+	list.Insert(10)
+
+	lDataArray := []int{1, 2, 5, 5, 9, 10}
+	// Act
+	chapter2.DeleteMiddleNode(&list)
+	got := list.GetDataArray()
+
+	// Assert
+	if !IsEqual(got, lDataArray) {
+		aTest.Error("Expected: ", lDataArray, "\n Recieved: ", got)
+	}
+}
+
+func TestCase10_Partition(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+	list.Insert(1)
+
+	// Act
+	got := chapter2.DeleteMiddleNode(&list)
+
+	// Assert
+	if got == nil {
+		aTest.Error("Expected: 1 node error")
+	}
+}
+
+func TestCase11_Partition(aTest *testing.T) {
+	// Arrange
+	var list LinkedList = LinkedList{}
+	list.Initialize()
+	list.Insert(11)
+	list.Insert(10)
+	list.Insert(5)
+	list.Insert(5)
+	list.Insert(2)
+	list.Insert(1)
+
+	lDataArray := []int{2, 1, 5, 5, 11, 10}
+	// Act
+	chapter2.Partition(&list, 5)
+	got := list.GetDataArray()
+
+	// Assert
+	if !IsEqual(got, lDataArray) {
+		aTest.Error("Expected: ", lDataArray, "\n Recieved: ", got)
+	}
+}

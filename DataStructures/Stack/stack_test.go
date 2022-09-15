@@ -1,6 +1,7 @@
 package stack_test
 
 import (
+	"fmt"
 	"testing"
 
 	. "github.com/abdullahkhan9375/GoLangCrackingTheCodingInterview/Common"
@@ -8,6 +9,7 @@ import (
 )
 
 type Stack = stack.Stack
+type SetofStacks = stack.SetofStacks
 type Node = stack.Node
 
 func TestCase1_Push(aTest *testing.T) {
@@ -91,5 +93,25 @@ func TestCase5_Pop(aTest *testing.T) {
 	_, err := lStack.Pop()
 	if err == nil {
 		aTest.Error("Expected nothing")
+	}
+}
+
+func TestCase6_SetofStacks(aTest *testing.T) {
+	// Arrange
+	var lStackSet SetofStacks = SetofStacks{}
+	lStackSet.Initialize(3)
+	lStackSet.Push(5)
+	lStackSet.Push(6)
+	lStackSet.Push(10)
+	lStackSet.Push(11)
+	lStackSet.Push(12)
+
+	lDataArray := [][]int{{5, 6, 10}, {11, 12}}
+	// Act
+	lStackArray, err := lStackSet.GetStackArray()
+
+	if err == nil {
+		fmt.Println("Data array: ", lDataArray)
+		fmt.Println("Stack array: ", lStackArray)
 	}
 }

@@ -1,6 +1,8 @@
 package stack
 
-import "errors"
+import (
+	"errors"
+)
 
 // TODO: Extract to common.
 type Node struct {
@@ -105,4 +107,22 @@ func (stackSet *SetofStacks) Push(aData int) {
 		lNewStack.Push(aData)
 		stackSet.addStack(&lNewStack)
 	}
+}
+
+func (stackSet *SetofStacks) GetStackArray() ([][]int, error) {
+	if len(stackSet.stacks) == 0 {
+		return [][]int{}, errors.New("stack set is empty")
+	}
+
+	var lTwoDArray = make([][]int, 0)
+	for _, lStack := range stackSet.stacks {
+		lStackArray, err := lStack.GetDataArray()
+		if err == nil {
+			lTwoDArray = append(lTwoDArray, lStackArray)
+		} else {
+			lTwoDArray = append(lTwoDArray, []int{})
+		}
+	}
+
+	return lTwoDArray, nil
 }
